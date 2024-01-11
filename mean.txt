@@ -1,30 +1,38 @@
 import statistics as st
-
-arr = [115.3, 195.5, 120.5,120.5,120.5, 110.2, 90.4, 105.6, 110.9, 116.3, 122.3, 125.4]
-
-sum = 0
-
-for num in arr:
-    sum += num
-    
-mean = sum/(len(arr))
-print("mean = ", mean)
-
-arr1 = sorted(arr)
-median = (arr1[len(arr1) // 2 - 1] + arr1[len(arr1) // 2]) / 2     
-print("median = ", median)
-
-mode = {}
-for ele in arr:
-    if ele not in mode:
-        mode[ele] = 0
-    else:
-        mode[ele] += 1
-    count = [g for g,l in mode.items() if l==max(mode.values())]
-    
-    
-print("mode = ",count[0])
-print("Standard divination = ",st.stdev(arr))
-print("varience = ",st.variance(arr))
-print("max = ", max(arr))
-print("min = ", min(arr))
+x=[115.3, 195.5, 120.5, 110.2, 90.4, 105.6, 110.9, 116.3, 122.3, 125.4,90.4]
+sum=0
+for i in x:
+  sum+=i
+mean=sum/len(x)
+X=x.sort()
+if (len(x))%2==0:
+  a=x[len(x)//2]
+  b=x[(len(x)//2)-1]
+  median=(a+b)/2
+else:
+  median=x[len(x)//2]
+mx=0
+mode=0
+for i in x:
+  if x.count(i)>=mx:
+    mx=x.count(i)
+    mode=i
+var=0
+for i in x:
+  var=var+(i-mean)**2
+var=var/(len(x)-1)
+std=var**0.5
+xm=min(x)
+xmax=max(x)
+MMS=[ ]
+SS=[ ]
+for i in x:
+  MMS.append(((i-xm)/(xmax-xm)))
+  SS.append((i-mean)/std)
+print(mean)
+print(median)
+print(mode)
+print(std)
+print(var)
+print(MMS)
+print(SS)
