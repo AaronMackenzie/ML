@@ -1,48 +1,39 @@
-import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
-from sklearn.linear_model import LinearRegression
+from matplotlib import pyplot
 
-# Load data from the CSV file without column names
-data = pd.read_csv('Food-Truck-LineReg.csv')
 
-# Assign generic column names
-data.columns = ['X', 'Y']
+data=pd.read_csv('/Users/aaronmackenzie/Desktop/Programming/Food-Truck-LineReg.csv')
 
-# Extract the X and Y variables from the dataset
-X = data[['X']].values
-Y = data[['Y']].values
+Xmean=data['X'].mean()
+Ymean=data['Y'].mean()
 
-# Create and fit the LinearRegression model
-model = LinearRegression().fit(X, Y)
+data['XY']=data['X']*data['Y']
 
-# Scatter plot
-plt.scatter(X, Y)
-plt.plot(X, model.predict(X), color='red') # Plot the regression line
-plt.xlabel("X")
-plt.ylabel("Y")
-plt.title("Scatter Plot with Regression Line")
-plt.show()
+XYmean=data['XY'].mean()
 
-# Get regression parameters
-intercept, slope = model.intercept_[0], model.coef_[0][0]
+data['Xp2']=data['X']**2
 
-# Calculate Cost, SSE, SSR, SST, and R-squared
-Y_pred = model.predict(X)
-Cost = np.mean((Y_pred - Y) ** 2)
-SSE = np.sum((Y - Y_pred) ** 2)
-SSR = np.sum((Y_pred - np.mean(Y)) ** 2)
-SST = np.sum((Y - np.mean(Y)) ** 2)
-R_squared = SSR / SST
-correlation_matrix = data.corr()
+Xp2mean=data['Xp2'].mean()
 
-print("Regression Parameters:")
-print(f"Intercept (b0): {intercept}")
-print(f"Slope (b1): {slope}")
+m=(((XYmean)-(Xmean*Ymean))/(Xp2mean-(Xmean**2)))
 
-print("Cost:", Cost)
-print("SSE:", SSE)
-print("SSR:", SSR)
-print("SST:", SST)
-print("R-squared:", R_squared)
-print("Correlation Matrix: ",correlation_matrix)
+c=Ymean-(m*Xmean)
+
+data['ypred']=(m*data['X']+c)
+
+pyplot.scatter(data['X'],data['Y'])
+pyplot.plot(data['X'],data['ypred'])
+
+data['error2']=(data['Y']-data['ypred'])**2
+
+sse=data['error2'].sum()
+data['y-ymean2']=(data['Y']-Ymean)**2
+sst=data['y-ymean2'].sum()
+data['ypred-ymean2']=(data['ypred']-Ymean)**2
+ssr=data['ypred-ymean2'].sum()
+r2=ssr/sst
+print("sse=",sse)
+print("sst=",sst)
+print("ssr",ssr)
+print("R2=",r2)
+
