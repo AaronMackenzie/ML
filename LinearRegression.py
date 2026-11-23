@@ -1,9 +1,10 @@
+import os
 # Import necessary libraries
 import pandas as pd
 from matplotlib import pyplot
 
 # Read the CSV file into a DataFrame
-data = pd.read_csv('/Users/aaronmackenzie/Desktop/Programming/Food-Truck-LineReg.csv')
+data = pd.read_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Food-Truck-LineReg.csv'), header=None, names=['X', 'Y'])
 
 # Calculate mean of X and Y
 Xmean = data['X'].mean()
@@ -26,7 +27,9 @@ data['ypred'] = (m * data['X'] + c)
 
 # Scatter plot of the data points and the regression line
 pyplot.scatter(data['X'], data['Y'])
-pyplot.plot(data['X'], data['ypred'])
+pyplot.plot(data['X'], data['ypred'], color='red')
+pyplot.xlabel('Population of city (10,000s)')
+pyplot.ylabel('Profit ($10,000s)')
 
 # Calculate error, SSE (Sum of Squares Error)
 data['error2'] = (data['Y'] - data['ypred'])**2
@@ -48,3 +51,6 @@ print("SSE =", sse)
 print("SST =", sst)
 print("SSR =", ssr)
 print("R-squared =", r2)
+
+
+pyplot.show()

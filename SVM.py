@@ -1,3 +1,4 @@
+import os
 # Import necessary libraries
 import pandas as pd
 from sklearn.svm import SVC
@@ -5,14 +6,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 # Load dataset
-data = pd.read_csv('glass(For SVM Program).csv')
+data = pd.read_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'glass(For SVM Program).csv'))
 
 # Separate features (X) and target variable (Y)
 X = data.drop("Type", axis=1)
 Y = data.Type
 
 # Split data into training and testing sets
-xtrain, xtest, ytrain, ytest = train_test_split(X, Y, test_size=0.25)
+xtrain, xtest, ytrain, ytest = train_test_split(X, Y, test_size=0.25, random_state=42)
 
 # Initialize SVM models with different kernel functions
 model1 = SVC(kernel="rbf")  # Radial Basis Function (RBF) kernel

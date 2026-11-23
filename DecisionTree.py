@@ -1,3 +1,4 @@
+import os
 # Import necessary libraries
 import pandas as pd
 
@@ -6,14 +7,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 # Read the CSV file containing the zoo data into a DataFrame
-data = pd.read_csv('/Users/aaronmackenzie/Desktop/Programming/zoo_data.csv')
+data = pd.read_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'zoo_data.csv'))
 
 # Separate features (X) and target variable (Y)
 X = data.drop("1.7", axis=1)  # X contains all columns except '1.7'
 Y = data['1.7']  # Y contains the '1.7' column
 
 # Split the dataset into training and testing sets (70% training, 30% testing)
-xtrain, xtest, ytrain, ytest = train_test_split(X, Y, test_size=0.3)
+xtrain, xtest, ytrain, ytest = train_test_split(X, Y, test_size=0.3, random_state=42)
 
 # Create a Decision Tree Classifier
 dtc = DecisionTreeClassifier()
