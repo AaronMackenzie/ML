@@ -1,11 +1,10 @@
-import os
 # Import necessary libraries
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
 # Load dataset
-data = pd.read_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'iris(For PCA Program).csv'))
+data = pd.read_csv('/Users/aaronmackenzie/Downloads/iris(For PCA Program).csv')
 
 # Separate features (X) and target variable (Y)
 X = data.drop("species", axis=1)

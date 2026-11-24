@@ -1,4 +1,3 @@
-import os
 # Import necessary libraries
 import pandas as pd
 import numpy as np
@@ -8,14 +7,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 # Load dataset
-data = pd.read_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'B3-pima.csv'))
+data = pd.read_csv('B3-pima.csv')
 
 # Separate features (X) and target variable (Y)
 X = data.drop("Outcome", axis=1)
 Y = data.Outcome
 
 # Split data into training and testing sets with stratification
-xtrain, xtest, ytrain, ytest = train_test_split(X, Y, stratify=Y, test_size=0.3, random_state=42)
+xtrain, xtest, ytrain, ytest = train_test_split(X, Y, stratify=Y, test_size=0.3)
 
 # Initialize Decision Tree and Random Forest classifiers
 dt = DecisionTreeClassifier()

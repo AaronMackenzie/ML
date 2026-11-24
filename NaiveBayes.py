@@ -1,4 +1,3 @@
-import os
 # Import necessary libraries
 import pandas as pd
 import numpy as np
@@ -9,7 +8,7 @@ from sklearn.model_selection import train_test_split
 from matplotlib import pyplot
 
 # Load dataset
-data = pd.read_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'covid.csv'))
+data = pd.read_csv("/Users/aaronmackenzie/Desktop/Programming/covid.csv")
 
 # Encode categorical variables
 le = preprocessing.LabelEncoder()
